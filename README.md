@@ -101,7 +101,9 @@ Ansible was used to automate configuration of the ELK machine. No configuration 
 What is the main advantage of automating configuration with Ansible?
 	
 o Ansible can be run from the command line and will ensure our provisioning scripts run identical everywhere. Ansible automation helps with the representation of Infrastructure as Code (IAC). 
+
 The playbook implements the following tasks:
+
 o Configure Elk VM with Docker: 
 - name: Configure Elk VM with Docker
   hosts: elk
@@ -109,25 +111,25 @@ o Configure Elk VM with Docker:
   become: true
   tasks:
 
- o Install docker.io
- o Install python3-pip
- o Install Docker module
-
-- name: Install docker.io
+ o Install docker.io, Install python3-pip, Install Docker module
+ 
+       # Use apt module 
+     - name: Install docker.io
       apt:
         update_cache: yes
         force_apt_get: yes
         name: docker.io
         state: present
 
-      # Use apt module
+       # Use apt module
     - name: Install python3-pip
       apt:
         force_apt_get: yes
         name: python3-pip
         state: present
 
-      # Use pip module (It will default to pip3)
+          # Use pip module (It will default to pip3) 
+      
     - name: Install Docker module
       pip:
         name: docker
@@ -137,7 +139,7 @@ o Configure Elk VM with Docker:
 
 o Increase virtual memory
 
-# Use command module
+    # Use command module
     - name: Increase virtual memory
       command: sysctl -w vm.max_map_count=262144
 
@@ -150,7 +152,8 @@ o Increase virtual memory
         reload: yes
 
 o Download and launch a docker elk container
-   # Use docker_container module
+
+    # Use docker_container module
     - name: download and launch a docker elk container
       docker_container:
         name: elk
@@ -164,7 +167,8 @@ o Download and launch a docker elk container
           -  5044:5044
 
 o Enable service docker on boot  
-   # Use systemd module
+
+    # Use systemd module
     - name: Enable service docker on boot
       systemd:
         name: docker
@@ -179,7 +183,8 @@ The following screenshot displays the result of running `docker ps` after succes
 
 
 
-Target Machines & Beats
+# Target Machines & Beats
+
 This ELK server is configured to monitor the following machines:
 	
 o Web-1 10.1.0.5
@@ -193,7 +198,7 @@ https://github.com/mrod1818/ELK-Project-1/blob/main/Filebeat_Module_Status_Scree
 
 o  metricbeat-7.4.0-amd64.deb
 
-![image](https://user-images.githubusercontent.com/88940042/148263848-dd9c86cf-1bbe-4de9-a269-846f0d58365d.png)
+https://github.com/mrod1818/ELK-Project-1/blob/main/Project_1_Metricbeat_Check_data.PNG
 
 
 
@@ -299,34 +304,34 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
   hosts: webservers
   become: true
   tasks:
-    # Use command module
+    #Use command module
   - name: Download metricbeat
     copy:
       src: /etc/ansible/roles/metricbeat-7.4.0-amd64.deb
       dest: /etc/metricbeat-7.4.0-amd64.deb
-    # Use command module
+    #Use command module
   - name: install metricbeat
     command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
 
-    # Use copy module
+     #Use copy module
   - name: drop in metricbeat config
     copy:
       src: /etc/ansible/files/metricbeat-config.yml
       dest: /etc/metricbeat/metricbeat.yml
 
-    # Use command module
+    #Use command module
   - name: enable and configure docker module for metric beat
     command: metricbeat modules enable docker
 
-    # Use command module
+    #Use command module
   - name: setup metric beat
     command: metricbeat setup
 
-    # Use command module
+    #use command module
   - name: start metric beat
     command: service metricbeat start
 
-    # Use systemd module
+    #Use systemd module
   - name: enable service metricbeat on boot
     systemd:
       name: metricbeat
