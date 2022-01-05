@@ -188,7 +188,8 @@ o Web-2 10.1.0.6
       We have installed the following Beats on these machines:
 o  filebeat-7.4.0-amd64.deb
 
-![image](https://user-images.githubusercontent.com/88940042/148263817-1c9f0072-e98f-4c06-a792-410312f38fac.png)
+https://github.com/mrod1818/ELK-Project-1/blob/main/Filebeat_Module_Status_Screenshot.PNG
+
 
 o  metricbeat-7.4.0-amd64.deb
 
