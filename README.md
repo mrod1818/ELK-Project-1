@@ -48,44 +48,24 @@ o Metricbeat takes the metrics and statistics that it collects and sends the out
 
 The configuration details of each machine may be found below.
 
-
-Name
-
-Function
-
-   IP Address
-
-    OS
-Jump-Box-Provisioner
-
-Gateway
-10.1.0.4 (Private)
-52.188.69.108 (Public)
-Linux ubuntu(20.04)
-ELK-VM 
-Monitoring
-Server 
-10.0.0.4 (Private)
-104.43.231.206(Public)
-Linux ubuntu(20.04)
-Web-1
-Web Server
-10.1.0.5 (Private)
-104.45.196.167(Public)
-Linux ubuntu(20.04)
-Web-2
-Web Server 
-10.1.0.6 (Private)
-104.45.196.67(Public)
-Linux ubuntu(20.04)
+|   Name                | Function         | IP Address   |              OS                 |
+| --------------------- | :----------------| ------------:| --------------------------------|
+| Jump-Box-Provisioner  |  Gateway            |10.1.0.4 (Private)      |Linux ubuntu(20.04)
+|                       |                     |52.188.69.108 (Public)   |  
+| ELK-VM               |    Monitoring-Server  |10.0.0.4 (Private) |Linux ubuntu(20.04)
+|                      |                      |104.43.231.206(Public)|     
+|Web-1                  |   Web-Server         |10.1.0.5 (Private)|Linux ubuntu(20.04)
+|                       |                      |104.45.196.167(Public)|    
+|Web-2                  |   Web-Server         |10.1.0.6 (Private)|Linux ubuntu(20.04)
+|                        |                    |104.45.196.67(Public)|    
 
  
 
 
- Access Policies
+# Access Policies
 The machines on the internal network are not exposed to the public Internet. 
 * Only the Jump-Box-Provisioner can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses: 
-24.107.133.208 ( LocalHost IP address) 
+   o 24.107.133.208 ( LocalHost IP address) 
 
 Machines within the network can only be accessed by the Jump-Box-Provisioner.
 
@@ -97,35 +77,16 @@ o 10.0.0.4/32
 A summary of the access policies in place can be found in the table below.
  
 
-Name
-
-Publicly Accessible
-Allowed IP
-Addresses
-
-Jump-Box-Provisioner
-
-Yes 
-24.107.133.208
-Personal IP
-
-ELK-VM
-
-No
-10.0.0.4
-Virtual Network
-
-Web-1
-
-No
-10.1.0.5
-Virtual Network
-
-Web-2
-
-No
-10.1.0.6
-Virtual Network
+| Name                 |Publicly Accessible |Allowed IP Addresses|
+| -----                | :----------------: |----------          |
+| Jump-Box-Provisioner |Yes                 |24.107.133.208      |
+|                      |                    |Personal IP         |
+|ELK-VM                |No                  | 10.0.0.4           |
+|                      |                    | Virtual Network    |    
+|Web-1                 |No                  |10.1.0.5            |
+|                      |                    |Virtual Network|
+|Web-2                 |No                 | 10.1.0.6|
+|                      |                    |Virtual Network|
 
 
  All these VMs can only be accessed from the Jump-Box-Provisioner 
@@ -133,7 +94,8 @@ Virtual Network
 
 
 
- Elk Configuration
+# Elk Configuration
+
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because services running can be limited, system installation and update can be streamlined, and processes become more replicable. 
 
 What is the main advantage of automating configuration with Ansible?
@@ -147,9 +109,10 @@ o Configure Elk VM with Docker:
   become: true
   tasks:
 
-o Install docker.io
-o Install python3-pip
-o Install Docker module
+ o Install docker.io
+ o Install python3-pip
+ o Install Docker module
+
 - name: Install docker.io
       apt:
         update_cache: yes
@@ -209,6 +172,7 @@ o Enable service docker on boot
  
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance. 
 
+![image](https://user-images.githubusercontent.com/88940042/148263631-7b7ce0fe-0986-4653-a0b3-abf8dc6b802a.png)
 
 
 
@@ -220,17 +184,26 @@ This ELK server is configured to monitor the following machines:
 	
 o Web-1 10.1.0.5
 o Web-2 10.1.0.6
+
       We have installed the following Beats on these machines:
 o  filebeat-7.4.0-amd64.deb
 
+![image](https://user-images.githubusercontent.com/88940042/148263817-1c9f0072-e98f-4c06-a792-410312f38fac.png)
+
 o  metricbeat-7.4.0-amd64.deb
+
+![image](https://user-images.githubusercontent.com/88940042/148263848-dd9c86cf-1bbe-4de9-a269-846f0d58365d.png)
+
 
 
 These Beats allow us to collect the following information from each machine:
-o filebeat-7.4.0-amd64.deb Installed as an agent on your servers, filebeat is used to monitor the log directories or specific log files and forwards them to either Elasticsearch or Logstash for indexing. Example would be the logs produced from the MySQL database supporting our application.  
+
+o filebeat-7.4.0-amd64.deb Installed as an agent on your servers, filebeat is used to monitor the log directories or specific log files and forwards them to either Elasticsearch or Logstash for indexing. Example would be the logs produced from the MySQL database supporting our application. 
+
 o metricbeat-7.4.0-amd64.deb Collects the machines metrics. It is a measurement to tell analysts how healthy it is. Example of metricbeat can be CPU usage/Uptime. 
 
-Using the Playbook
+# Using the Playbook
+
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 SSH into the control node and follow the steps below:
 Filebeat:
@@ -248,16 +221,19 @@ Metricbeat:
 * Run the playbook and navigate to http://104.43.231.206:5601 (ELK public IP) to check that the installation worked as expected. 
 
 * Which file is the playbook? 
-o filebeat-playbok.yml 
+    o filebeat-playbok.yml 
+
 * Where do you copy it? 
-o You copy file from /etc/ansible/files/filebeat-config.yml to /etc/ansible/roles/files/filebeat-config.yml
+    o You copy file from /etc/ansible/files/filebeat-config.yml to /etc/ansible/roles/files/filebeat-config.yml
+
 * Which file do you update to make Ansible run the playbook on a specific machine?
-o Update the hosts file /etc/ansible/hosts
+    o Update the hosts file /etc/ansible/hosts
 
 
 
 *  How do I specify which machine to install the ELK server on versus which to install Filebeat on?
 o At the beginning of the playbook you specify which hosts: 
+
 - name: installing and launching filebeat
   hosts: webservers
   become: yes
