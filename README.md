@@ -268,39 +268,8 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
 
 - To create the playbook: nano filebeat-playbook.yml
 
----
-- name: installing and launching filebeat
-  hosts: webservers
-  become: yes
-  tasks:
+![image](https://user-images.githubusercontent.com/88940042/148292148-66246610-7b1c-4170-850d-b1d352f21d83.png)
 
-  - name: download filebeat deb
-    copy:
-      src: /etc/ansible/roles/filebeat-7.4.0-amd64.deb
-      dest: /etc/filebeat-7.4.0-amd64.deb
-  - name: install filebeat deb
-    command: dpkg -i /etc/filebeat-7.4.0-amd64.deb
-
-  - name: drop in filebeat.yml
-    copy:
-      src: /etc/ansible/files/filebeat-config.yml
-      dest: /etc/filebeat/filebeat.yml
-
-  - name: enable and configure system module
-    command: filebeat modules enable system
-
-  - name: setup filebeat
-    command: filebeat setup
-
-  - name: start filebeat service
-    command: service filebeat start
-
-  - name: enable service filebeat on boot
-    systemd:
-      name: filebeat
-      enabled: yes
-
----
 -To run the playbook: ansible-playbook filebeat-playbook.yml
 
 * In order to run the playbook, you have to be in the directory the playbook is at, or give the path to it.
@@ -311,44 +280,9 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
 - To create the metricbeat-config.yml file: nano metricbeat-config.yml. For this, I used the metricbeat configuration file template.
 
 - To create the playbook: nano metricbeat-playbook.yml
----
-- name: Install metric beat
-  hosts: webservers
-  become: true
-  tasks:
-    **# Use command module******
-   - name: Download metricbeat
-    copy:
-      src: /etc/ansible/roles/metricbeat-7.4.0-amd64.deb
-      dest: /etc/metricbeat-7.4.0-amd64.deb
-    # Use command module
-  - name: install metricbeat
-    command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
 
-    # Use copy module
-  - name: drop in metricbeat config
-    copy:
-      src: /etc/ansible/files/metricbeat-config.yml
-      dest: /etc/metricbeat/metricbeat.yml
+![image](https://user-images.githubusercontent.com/88940042/148292239-e98f197a-a7af-4db0-9c56-1ae957c2ec58.png)
 
-    # Use command module
-  - name: enable and configure docker module for metric beat
-    command: metricbeat modules enable docker
-
-    # Use command module
-  - name: setup metric beat
-    command: metricbeat setup
-
-    # Use command module
-  - name: start metric beat
-    command: service metricbeat start
-
-    # Use systemd module
-  - name: enable service metricbeat on boot
-    systemd:
-      name: metricbeat
-      enabled: yes
-   
    - To run the playbook: ansible-playbook metricbeat-playbook.yml
    
    * In order to run the playbook, you have to be in the directory the playbook is at or give the path to it. 
