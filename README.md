@@ -316,39 +316,38 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
   hosts: webservers
   become: true
   tasks:
-     
-  - name: Download metricbeat
+    **# Use command module******
+   - name: Download metricbeat
     copy:
       src: /etc/ansible/roles/metricbeat-7.4.0-amd64.deb
       dest: /etc/metricbeat-7.4.0-amd64.deb
-     
+    # Use command module
   - name: install metricbeat
     command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
 
-    
+    # Use copy module
   - name: drop in metricbeat config
     copy:
       src: /etc/ansible/files/metricbeat-config.yml
       dest: /etc/metricbeat/metricbeat.yml
 
-   
+    # Use command module
   - name: enable and configure docker module for metric beat
     command: metricbeat modules enable docker
 
-   
+    # Use command module
   - name: setup metric beat
     command: metricbeat setup
 
-  
+    # Use command module
   - name: start metric beat
     command: service metricbeat start
 
-  
+    # Use systemd module
   - name: enable service metricbeat on boot
     systemd:
       name: metricbeat
       enabled: yes
-
    
    - To run the playbook: ansible-playbook metricbeat-playbook.yml
    
