@@ -8,6 +8,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   
 https://github.com/mrod1818/ELK-Project-1/blob/main/elk_playbook.yml
 https://github.com/mrod1818/ELK-Project-1/blob/main/filebeat-config.yml
+https://github.com/mrod1818/ELK-Project-1/blob/main/metricbeat-playbook.yml
 
 
 This document contains the following details:
