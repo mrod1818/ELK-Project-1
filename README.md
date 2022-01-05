@@ -10,7 +10,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   
 https://github.com/mrod1818/ELK-Project-1/blob/main/elk_playbook.yml
 
-https://github.com/mrod1818/ELK-Project-1/blob/main/filebeat-config.yml
+https://github.com/mrod1818/ELK-Project-1/blob/main/filebeat-playbook.yml
 
 https://github.com/mrod1818/ELK-Project-1/blob/main/metricbeat-playbook.yml
 
@@ -70,16 +70,19 @@ The configuration details of each machine may be found below.
 
 # Access Policies
 The machines on the internal network are not exposed to the public Internet. 
-* Only the Jump-Box-Provisioner can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses: 
+* Only the Jump-Box-Provisioner can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+ 
    o 24.107.133.208 ( LocalHost IP address) 
 
 Machines within the network can only be accessed by the Jump-Box-Provisioner.
 
 * Which machine did you allow to access your ELK VM? 
+
 o Allows Jump-Box-Provisoner to SSH through port 22
       
 * What was its IP address? 
 o 10.0.0.4/32
+
 A summary of the access policies in place can be found in the table below.
  
 
