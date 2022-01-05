@@ -217,7 +217,9 @@ o metricbeat-7.4.0-amd64.deb Collects the machines metrics. It is a measurement 
 # Using the Playbook
 
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
+
 SSH into the control node and follow the steps below:
+
 Filebeat:
 	
 * Copy the configuration file to your webservers and ELK server. 
@@ -233,18 +235,22 @@ Metricbeat:
 * Run the playbook and navigate to http://104.43.231.206:5601 (ELK public IP) to check that the installation worked as expected. 
 
 * Which file is the playbook? 
+
     o filebeat-playbok.yml 
 
 * Where do you copy it? 
+
     o You copy file from /etc/ansible/files/filebeat-config.yml to /etc/ansible/roles/files/filebeat-config.yml
 
 * Which file do you update to make Ansible run the playbook on a specific machine?
-    o Update the hosts file /etc/ansible/hosts
+
+        o Update the hosts file /etc/ansible/hosts
 
 
 
 *  How do I specify which machine to install the ELK server on versus which to install Filebeat on?
-o At the beginning of the playbook you specify which hosts: 
+
+         o At the beginning of the playbook you specify which hosts: 
 
 - name: installing and launching filebeat
   hosts: webservers
