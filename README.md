@@ -283,43 +283,7 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
 - To create the metricbeat-config.yml file: nano metricbeat-config.yml. For this, I used the metricbeat configuration file template.
 
 - To create the playbook: nano metricbeat-playbook.yml
-     ---
-o - name: Install metric beat
-  hosts: webservers
-  become: true
-  tasks:
-    # Use command module
-  - name: Download metricbeat
-    copy:
-      src: /etc/ansible/roles/metricbeat-7.4.0-amd64.deb
-      dest: /etc/metricbeat-7.4.0-amd64.deb
- o  # Use command module
-  - name: install metricbeat
-    command: dpkg -i /etc/metricbeat-7.4.0-amd64.deb
-
-  o  # Use copy module
-  - name: drop in metricbeat config
-    copy:
-      src: /etc/ansible/files/metricbeat-config.yml
-      dest: /etc/metricbeat/metricbeat.yml
-
-  o  # Use command module
-  - name: enable and configure docker module for metric beat
-    command: metricbeat modules enable docker
-
- o   # Use command module
-  - name: setup metric beat
-    command: metricbeat setup
-
- o   # Use command module
-  - name: start metric beat
-    command: service metricbeat start
-
- o   # Use systemd module
-  - name: enable service metricbeat on boot
-    systemd:
-      name: metricbeat
-      enabled: yes
+  
 
 ![image](https://user-images.githubusercontent.com/88940042/148292239-e98f197a-a7af-4db0-9c56-1ae957c2ec58.png)
 
