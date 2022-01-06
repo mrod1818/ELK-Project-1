@@ -255,10 +255,10 @@ Metricbeat:
 
          o At the beginning of the playbook you specify which hosts: 
 
-- name: installing and launching filebeat
-  hosts: webservers
-  become: yes
-  tasks:
+          o - name: installing and launching filebeat
+              hosts: webservers
+              become: yes
+              tasks:
 
 * Which URL do you navigate to in order to check that the ELK server is running?
 to http://104.43.231.206:5601/app/kibana
